@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>petroX | Order Now</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  .container {
+    width: 80%;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #ffffff;
+  }
+  button.no {
+    background-color: #f44336;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>PetroX is only available in cash on delivery payment method.</h2>
+  <h3>Click Yes for confirmed your order.</h3>
+  <h3>Click No for cancel your order.</h3>
+  <button onclick="redirectToNextPage()">Yes</button>
+  <button class="no" onclick="redirectToHomePage()">No</button>
+</div>
+
+<script>
+  function redirectToNextPage() {
+    window.location.href = 'order4.html';
+  }
+
+  function redirectToHomePage() {
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>

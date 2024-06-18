@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .invoice-container {
+        max-width: 600px;
+        margin: 10px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff; 
+        height:550px
+    }
+    .invoice-header {
+        text-align: center;
+        margin-top:-35px;
+        margin-bottom: -15px;
+    }
+    .invoice-details {
+        margin-bottom: 10px;
+    }
+    .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+    .invoice-table th,
+    .invoice-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+    .download-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+    }
+    .download-btn:hover {
+        background-color: #0056b3;
+    }
+    .rectangle-curve-btn {
+        background-color: #e25111; /* Button Color */
+        color: white; /* Text Color */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px; /* Adjust this for curve */
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-left: 250px;
+    }
+      
+    .rectangle-curve-btn:hover {
+        background-color: #e25111; /* Hover Color */
+    }
+      
+</style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>Invoice</h1>
+        </div>
+        <div class="billing-details">
+            <h2>Billing Details</h2>
+            <p><strong>Customer Name:</strong> parth </p>
+            <p><strong>Address:</strong> ldrp institute of technology and research</p>
+            <p><strong>Contact Number:</strong> 7621016519</p>
+        </div>
+        <div class="invoice-details">
+            <h2>Order Details</h2>
+            <p><strong>Fuel Type :</strong> Petrol</p>
+            <p><strong>Quantity (Liters) :</strong> 5</p>
+            <p><strong>Total Amount (INR) :</strong> 484.55</p>
+            <p><strong>Tax</strong> 4.25%</p>
+            <p><strong>Service fee :</strong> 87.00</p>
+            <p><strong>New client discount :</strong> 50.00</p>
+        </div>
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price per Liter (INR)</th>
+                    <th>Tax</th>
+                    <th>Total (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Petrol</td>
+                    <td>5 ltr</td>
+                    <td>96.91</td>
+                    <td>4.25%</td>
+                    <td>₹ 542.14</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="rectangle-curve-btn" onclick="redirectToNextPage()">Order Now</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        function redirectToNextPage() {
+            window.location.href = 'order5.html';
+          }
+
+        function downloadInvoice() {
+            const invoiceContainer = document.querySelector('.invoice-container');
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            pdf.html(invoiceContainer, {
+                callback: function(pdf) {
+                    pdf.save('invoice.pdf');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

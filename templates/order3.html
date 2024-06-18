@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>petroX | Order Now</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    text-align: center;
+  }
+  .confirmation {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  #tickmark {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    animation: dash 0.5s linear forwards;
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .gif {
+    margin-top: 20px;
+    max-width: 40%;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="confirmation">Your Fuel Order Is Placed.</div>
+  <div class="confirmation">Your Fuel Is Ready To Dispatch.</div>
+  <img class="gif" src="static/images/s1.gif" alt="Success GIF">
+  <div class="confirmation">We'll Notified When Your Fuel Truck Has Been Arrived 🙂</div>
+  <button onclick="returnToHomePage()">Return to Home Page</button>
+  <button onclick="downloadPDF()">Download Invoice</button>
+</div>
+
+<script>
+  function returnToHomePage() {
+    window.location.href = 'index.html'; 
+  }
+
+  function downloadPDF() {
+    
+    var pdfUrl = 'static/invoice/parth invoice.pdf';
+  
+    var link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = 'static/invoice/parth invoice.pdf'; 
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+</body>
+</html>

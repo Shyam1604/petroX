@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    header {
+        background-color: white;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+    header h1{
+        color : black;
+    }
+    nav {
+        background-color: #e25111;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+    }
+    .container {
+        max-width: 960px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        border: 2px solid #e25111;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    section {
+        text-align: center;
+        
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    textarea {
+        height: 150px;
+    }
+    button {
+        background-color: #e25111;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #map {
+        height: 400px;
+        margin-bottom: 20px;
+    }
+    canvas {
+        max-width: 100%;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .reorder-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    .reorder-btn:hover {
+        background-color: #0056b3;
+    }
+    .wallet {
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>My Dashboard</h1>
+    </header>
+    <nav>
+        <a href="#account">Account Information</a>
+        <a href="#address">Address Book</a>
+        <a href="#order">Order Now</a>
+        <a href="#myorders">My Orders</a>
+        <a href="#wallet">My Wallet</a>
+        <a href="#Statistics">Order Statistics</a>
+        <a href="#feedback">Feedback</a>
+    </nav>
+    <div class="container">
+        <section id="account">
+            <h2>Account Information</h2>
+            <form>
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+                <label for="middlename">Middle Name:</label>
+                <input type="text" id="middlename" name="middlename" placeholder="Enter your middle name">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="phonenumber">Phone Number:</label>
+                <input type="tel" id="phonenumber" name="phonenumber" placeholder="Enter your phone number" required>
+                <label for="idnumber">ID Number: </label>
+                <input type="id" id="idnumber" name="idnumber" placeholder="Enter your id number" required>
+                <label for="address">Residential Address:</label>
+                <textarea id="address" name="address" placeholder="Enter your residential address" required></textarea>
+                <label for="gstnumber">GST Number:</label>
+                <input type="text" id="gstnumber" name="gstnumber" placeholder="Enter your GST number" required>
+                <label for="identity">Identity Proof:</label>
+                <input type="text" id="idnumber" name="idnumber" placeholder="Enter your ID number" required>
+                <input type="file" id="identity" name="identity" accept="image/*" required>
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+       <section id="address">
+            <h2>address</h2>
+            <label for="address">Select Address: </label>
+            <input type="text" id="address" name="address" placeholder="Enter your address" autocomplete="off">
+            <div id="map"></div>
+            <button onclick="getCurrentLocation()">Use Current Location</button>
+        </section>
+        <section id="order">
+            <h2>Order Now</h2>
+                 <label for="vehicleType">Select Vehicle Type : </label>
+                    <label for="privateVehicle">Private Vehicle</label>
+                    <input type="radio" id="privateVehicle" name="vehicleType" value="private">
+                    <label for="commercialVehicle">Commercial Vehicle</label>
+                    <input type="radio" id="commercialVehicle" name="vehicleType" value="commercial">
+            <form>
+                <label for="fuelType">Select Fuel Type:</label>
+                <select id="fuelType" name="fuelType">
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">Electric Vehicle Batteries</option>
+                </select>
+                <label for="quantity">Quantity (Liters/Units):</label>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="Enter quantity" required>
+            </form>
+            <button type="submit">Place Order</button>
+            
+        </section>
+        <section id="myorders">
+            <h2>My Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Reorder</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample row, replace with dynamic data from backend -->
+                    <tr>
+                        <td>123456</td>
+                        <td>2024-01-01</td>
+                        <td>Petrol</td>
+                        <td>50 Liters</td>
+                        <td><button class="reorder-btn" onclick="reorder(123456)">Reorder</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="wallet">
+            <h2>Wallet</h2>
+            <form>
+                <h3>Available Balance</h3>
+                <p><strong>INR 5000</strong></p>
+                <!-- Display actual balance dynamically -->
+                <label for="amount">Amount (INR):</label>
+                <input type="number" id="amount" name="amount" min="1" placeholder="Enter amount" required>
+                <label for="upi">Select UPI Payment Method:</label>
+                <select id="upi" name="upi">
+                    <option value="googlepay">Google Pay</option>
+                    <option value="phonepe">PhonePe</option>
+                    <option value="paytm">Paytm</option>
+                    <!-- Add more UPI options as needed -->
+                </select>
+                <button type="submit">Add Money</button>
+            </form>
+        </section>
+        <section id="#Statistics">
+            <h2>Order Statistics</h2>
+            <canvas id="fuelUsageChart"></canvas>
+        </section>
+        <section id="feedback">
+            <h2>Feedback</h2>
+            <form>
+                <label for="complaint-type">Choose Complaint Type:</label>
+                <select id="complaint-type" name="complaint-type">
+                    <option value="delivery">Delivery Issue</option>
+                    <option value="quality">Fuel Quality Issue</option>
+                    <option value="billing">Billing Problem</option>
+                    <option value="other"> Other</option>
+                </select>
+                <label for="explanation">Explanation:</label>
+                <textarea id="explanation" name="explanation" placeholder="Enter your explanation here..." required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
+    <script>
+        var fuelUsageData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
+                label: 'Fuel Usage (Liters)',
+                data: [100, 150, 120, 180, 200, 160, 210, 190, 170, 220, 250, 230],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Configure and render the chart
+        var ctx = document.getElementById('fuelUsageChart').getContext('2d');
+        var fuelUsageChart = new Chart(ctx, {
+            type: 'line',
+            data: fuelUsageData,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        // Initialize and display the map
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 15
+            });
+            var marker = new google.maps.Marker({
+                position: {lat: -34.397, lng: 150.644},
+                map: map,
+                draggable: true
+            });
+        }
+
+        // Get the user's current location
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: userLocation,
+                        zoom: 15
+                    });
+                    var marker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        draggable: true
+                    });
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+        // Function to handle reorder button click
+        function reorder(orderId) {
+            // Perform reorder action, for example:
+            alert("Reorder clicked for order ID: " + orderId);
+            // Implement your logic here to place the reorder
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</body>
+</html>
